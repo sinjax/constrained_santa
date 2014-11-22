@@ -23,34 +23,8 @@
 
 <body>
     <div class="container">
-        <!-- TITLE Image Area-->
-        <div id="titleimg"></div>
         <!-- NAVBAR
     ================================================== -->
-        <div class="navbar navbar-default" role="navigation">
-            
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        
-                        Click for Navigation
-                    </button>
-                </div>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="nav nav-pills nav-justified ">
-                        <li class=""><a href="{{ url_for('plan') }}">The Plan</a>
-                        </li>
-                        <li class=""><a href="{{ url_for('place') }}">The Place</a>
-                        </li>
-                        <li class=""><a href="{{ url_for('dinner') }}">The Dinner</a>
-                        </li>
-                        <li class=""><a href="{{ url_for('rsvp') }}">RSVP</a>
-                        </li>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.navbar-collapse -->
-        </div>
         
         <div class="container">
             {% block content %} {% endblock %}

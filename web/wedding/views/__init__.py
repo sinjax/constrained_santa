@@ -1,19 +1,20 @@
 import rsvp
+import santatron
 from wedding import app
 from helpers import *
+from wedding.models import *
+from wedding import embed
 import os
+import json
+from flask import request
 
-@app.route("/place", methods=["GET"])
-def place(): return render("place.html")
-
+@app.errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 @app.route("/", methods=["GET"])
-def plan(): return render("plan.html")
-
-@app.route("/dinner", methods=["GET"])
-def dinner(): return render("dinner.html")
-
-@app.route("/note", methods=["GET"])
-def note(): return render("invnote.html")
+def index(): return render("index.html")
 
 @app.route("/templated/<path:filename>", methods=["GET"])
 def templated(filename):

@@ -24,3 +24,10 @@ class BaseFields(object):
                 return ('_%s_%s' % (word[:1], word[-1])).lower()
             return '_' + word.lower()
         return re.sub(r'([A-Z]+)(?=[a-z0-9])', _join, cls.__name__).lstrip('_').lower()
+    # def todict(self):
+    #     return dict(
+    #         [
+    #             (x.name,self.__getattribute__(x.name)) 
+    #             for x in self.__table__.columns
+    #         ]
+    #     )
