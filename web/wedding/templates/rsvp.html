@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}RSVP{% endblock %}
+{% block script %}
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+	if(!$(".rsvp_positive").is(":checked")){
+		$('.onlyifcoming').prop('disabled', true)	
+	} else{
+		$('.onlyifcoming').prop('disabled', false)	
+	}
+	
+	$(".rsvp_rd").change(function (evt) {
+		if($(evt.target).hasClass("rsvp_negative")){
+			$('.onlyifcoming').prop('disabled', true)
+		} else {
+			$('.onlyifcoming').prop('disabled', false)
+		}
+	})
+})
+</script>
+{% endblock %}
+{% block content %}
+
+<h1>RSVP</h1>
+{% if 'dberror' in errors %}
+	<span class="help-block">{{ errors.dberror }}</span>
+{% endif %}
+<form method="post" action="" role="form">
+	<div class="form-group{% if 'name' in errors %} has-error{% endif %}">
+		<label for="elm_name">Name</label>
+		<input id="elm_name" name="name" class="form-control" type="text" value="{{form.name}}" placeholder="e.g. Rev Person McFace"/>
+		{% if 'name' in errors %}
+			<span class="help-block">{{ errors.name }}</span>
+		{% else %}	
+			<p class="help-block" id="elm_name_guide">... so we know who you are!</p>
+        {% endif %}
+			
+	</div>
+	<div class="form-group{% if 'email' in errors %} has-error{% endif %}">
+	    <label for="elm_email">Email address</label>
+	    <input name="email" type="email" class="form-control" id="elm_email" placeholder="your email!" value="{{form.email}}">
+	</div>
+	<div class="form-group{% if 'phone' in errors %} has-error{% endif %}">
+	    <label for="elm_mobile">Phone Number</label>
+	    <input type="text" class="form-control" name="phone" id="elm_mobile" placeholder="your phone number!" value="{{form.phone}}">
+	    {% if 'email' in errors %}
+		<p class="help-block" id="elm_name_guide">... if you'd like to bring food please give us a either way to contact you</p>
+		{% else %}	
+			<p class="help-block" id="elm_name_guide">... so we can get in contact. Leave these blank if you like. Fill them in if you want to bring some food. We promise to only sell your details to the classiest spam bots.</p>
+	    {% endif %}
+  	</div>
+  	
+  	
+	<div class="form-group{% if 'rsvp' in errors %} has-error{% endif %}" >
+		<label for="elm_reply">I am... </label>
+		<div class="form-group">
+		<label >
+			<input name="rsvp" id="elm_reply_1" class="rsvp_rd rsvp_positive" type="radio" value="1" {% if form.rsvp == '1' %} checked{% endif %}/> ...coming! see you there :)
+		</label>
+		<br/>
+		<label >
+			<input name="rsvp" id="elm_reply_2" class="rsvp_rd rsvp_negative" name="rsvp" type="radio" value="0" {% if form.rsvp == '0' %} checked{% endif %} /> ...not coming! sorry :(
+		</label>
+		{% if 'rsvp' in errors %}
+			<span class="help-block">{{ errors.rsvp }}</span>
+		{% else %}	
+        {% endif %}
+		</div>
+		<!-- <div class="form-group">
+			<label >
+				<input name="elm_reply" id="elm_reply_3" class="rsvp_rd rsvp_negative" type="radio" value="1" /> ... a sparrow, and therefore cannot conceptualise 'weddings'.
+			</label>
+		</div> -->
+	</div>
+	<div class="form-group{% if 'nadults' in errors or 'nchildren' in errors %} has-error{% endif %}">
+	    <label for="elm_mobile">Number of Adults</label>
+	    <input type="number" class="form-control onlyifcoming" name="nadults" id="elm_mobile" placeholder="In your party" default="1" value="{{form.nadults|default(1)}}">
+	    {% if 'nadults' in errors %}
+			<span class="help-block">{{ errors.nadults }}</span>
+		{% else %}	
+        {% endif %}
+	    <label for="elm_mobile">Number of Children</label>
+	    <input type="number" class="form-control onlyifcoming" name="nchildren" id="elm_mobile" placeholder="In your party" value="{{form.nchildren|default(0)}}">
+	     {% if 'nchildren' in errors %}
+			<span class="help-block">{{ errors.nchildren }}</span>
+		{% else %}	
+        {% endif %}
+
+  	</div>
+	<div class="checkbox">
+	    <label>
+	      <input type="checkbox" name="bringfood" class="onlyifcoming" {% if form.bringfood %} checked{% endif %}/> I'd like to bring some food! <a href="{{ url_for('dinner') }}">click here for the menu</a>
+	    </label>
+  	</div>
+  	<div class="form-group">
+		<label >
+			Details and Comments
+		</label>
+		<textarea class="form-control" name="comments" rows="3">{{form.comments}}</textarea>
+		<p class="help-block" id="elm_name_guide">If you are coming: Which days you'll be in the area (the whole weekend, just the saturday eve party? etc.). If you are staying the weekend, would you like a room in the hostel, or are you planning on finding your own accommodation near by? If you aren't coming, sadness! please let us know why!</p>
+
+	</div>
+	<button type="submit" class="btn btn-default" >Respond</button>
+	</div>
+</form>	
+
+<h2> Current Guest List </h2>
+<p>These lovely people have confirmed so far. If you know them perhaps you'd like to self organise a lift share?</p>
+<ol>
+{% for entry in confirmedAttending %}
+    <li>{{ entry.name }}</li>
+{% else %}
+No confirmed guests yet!
+{% endfor %}
+</ol>
+{% endblock %}

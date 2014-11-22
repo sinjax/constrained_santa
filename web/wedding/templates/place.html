@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Location{% endblock %}
+{% block script %}
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+  function initialize() {
+  	var loc = new google.maps.LatLng(52.635496 ,-2.488539)
+  	var map_canvas = document.getElementById('map_canvas');
+  	 var map_options = {
+      center: loc,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(map_canvas,map_options);
+    var myMarkerOpts = {
+        position: loc,
+        map: map
+      };
+
+	var marker = new google.maps.Marker(myMarkerOpts);
+
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{% endblock %}
+{% block content %}
+{% include 'tldr.html' %}
+
+<h1>Getting there</h1>
+
+<address>
+  <strong>Coalbrookdale YHA</strong><br>
+  	1 Paradise,<br>
+  	Coalbrookdale,<br>
+  	Telford, <br>
+	Shropshire, <br>
+	TF8 7NR  <br>
+</address>
+
+<div id="map_canvas"></div>
+<img class="infobox" src="{{ url_for('static', filename='assets/imgs/hostel_1.jpg') }}" alt="hostel exterior">
+<img class="infobox" src="{{ url_for('static', filename='assets/imgs/hostel_2.jpg') }}" alt="hostel exterior">
+
+<h3>The Hostel and Local attractions</h3>
+<p>You can find more information about the hostel itself <a href="http://www.yha.org.uk/hostel/ironbridge-coalbrookdale">here</a></p>
+
+<p>The local area has plenty to keep yourself occupied with and Ironbridge Gorge is a world heritage site so it is a beautiful place to just go rambling.</p>
+
+<p><a href="http://www.ironbridge.org.uk/">Their webiste</a> has lots of useful information if you're looking to plan some fun for Sunday and Monday.</p>
+
+<h3>Parking</h3>
+
+You can do drop offs at the hostel itself, but you cannot park there.
+There are many local long stay car parks within walking distance of the hostel.
+
+More specifically:
+
+<dl>
+  <dt>Hostel Parking</dt>
+  <dd>The hostel itself has limited parking for 10 cars, also 2/3 cars can park along the road leading up to the hostel. We'll probably reserve this for people with disabilities, core wedding organisers and folks staying at the hostel (in that order)</dd>
+  <dt>Dale End Car Park</dt>
+  <dd>Space for 50 cars, no maximum stay costing £1.40. This is the closest long stay car park, about 10 minutes walk from the hostel.</dd>
+  <dt>The Bridge - Ironbridge Road</dt>
+  <dd>Space for 108 cars, no maximum stay, costing £1.40. This is a little further away, roughly 15 minutes walk from the hostel.</dd>
+</dl>
+
+For more detailed information about all the local car parks check out <a href="http://en.parkopedia.co.uk/parking/1_paradise_coalbrookdale_united_kingdom/?ac=1&amp;country=UK&amp;lat=52.6344963&amp;lng=-2.4885386999999355">parkopedia</a>.
+
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Emma, Sina, wedding time! - {% block title %}{% endblock %}</title>
+
+    <!-- Le styles -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/jumbotron-narrow.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/menu.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{{ url_for('static',filename='assets/js/bootstrap.js') }}"></script>
+    <meta name="viewport" content="initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- TITLE Image Area-->
+        <div id="titleimg"></div>
+        <!-- NAVBAR
+    ================================================== -->
+        <div class="navbar navbar-default" role="navigation">
+            
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        
+                        Click for Navigation
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav nav-pills nav-justified ">
+                        <li class=""><a href="{{ url_for('plan') }}">The Plan</a>
+                        </li>
+                        <li class=""><a href="{{ url_for('place') }}">The Place</a>
+                        </li>
+                        <li class=""><a href="{{ url_for('dinner') }}">The Dinner</a>
+                        </li>
+                        <li class=""><a href="{{ url_for('rsvp') }}">RSVP</a>
+                        </li>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.navbar-collapse -->
+        </div>
+        
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    {% block script %}{% endblock %}
+</body>
+</html>

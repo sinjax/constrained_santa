@@ -1,0 +1,16 @@
+{{rsvp.name}} has replied saying they won't be coming!
+
+===============================
+They provided the following information:
+name: {{rsvp.name}}
+email: {{rsvp.email}}
+phone: {{rsvp.phone}}
+Other comments:
+{{rsvp.comment}}
+
+===============================
+Some book keeping stuff.
+To confirm this RSVP click here: http://emmasinaweddingtime.info{{ url_for('rsvpconfirm', id=rsvp.
+unique_hash) }}
+If this looks like spam click here: http://emmasinaweddingtime.info{{ url_for('rsvpdeny', id=rsvp.
+unique_hash) }}

@@ -1,0 +1,23 @@
+{{rsvp.name}} has confirmed that they are coming!
+
+===============================
+They provided the following information:
+name: {{rsvp.name}}
+email: {{rsvp.email}}
+phone: {{rsvp.phone}}
+Number of adults: {{rsvp.nadults}}
+Number of children: {{rsvp.nchildren}}
+Other comments:
+{{rsvp.comment}}
+
+===============================
+{% if rsvp.bringingFood %}
+They want to bring food! Talk to them about this!
+{% endif %}
+===============================
+
+Some book keeping stuff.
+To confirm this RSVP click here: http://emmasinaweddingtime.info{{ url_for('rsvpconfirm', id=rsvp.
+unique_hash) }}
+If this looks like spam click here: http://emmasinaweddingtime.info{{ url_for('rsvpdeny', id=rsvp.
+unique_hash) }}

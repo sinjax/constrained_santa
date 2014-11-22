@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}RSVP{% endblock %}
+
+{% block content %}
+<h1>Thanks {{form.name}}!</h1>
+{% if form.attending %}
+<p>See you there!</p>
+{% else %}
+<p>Sorry to hear you can't make it, let us know if you change your mind!</p>
+{% endif %}
+{% endblock %}

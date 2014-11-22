@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Emma, Sina, wedding time! - {% block title %}{% endblock %}</title>
+
+    <!-- Le styles -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.css') }}" rel="stylesheet" media="all">
+    <link href="{{ url_for('static', filename='assets/css/note.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="{{ url_for('static',filename='assets/js/bootstrap.js') }}"></script>
+    <meta name="viewport" content="initial-scale=1.0" />
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(".col-md-6").removeClass().addClass("col-xs-6")
+        $("h1").replaceWith(function() {
+            return '<h2>' + $(this).text() + '</h2>';
+        });
+    })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- TITLE Image Area-->
+        <p id="titleimg"></p>
+        <div class="container">
+            <div class="panel panel-info infobox">
+    <div class="panel-heading">Where/When:</div>
+    <ul>
+        <li><b>Where:</b><br/>1 Paradise, Coalbrookdale, TF8 7NR</li>
+        <li><b>Dates:</b><br/>23rd - 26th of May 2014</li>
+        <li><b>The main party:</b><br/>24th May 2014, 3pm til late</li>
+    </ul>
+</div>
+            <h1>So the plan is...</h1>
+
+
+<p>We have booked a large <a href="{{url_for('place')}}">Youth Hostel in Coalbrookdale</a> from the evening of the 23rd May to the afternoon of the 26th May and will make sure someone is always on site to provide greetings and directions to the kettle! The basic idea is a party on the Saturday afternoon/evening with sitting around/exploring the local area for the other days.</p>
+
+<h3>The schedule</h3>
+<p>
+    On Saturday 24th we're having a formal shindig 
+    beginning at 3pm, ending late. 
+    <div class="panel panel-info infobox">
+    <div class="panel-heading">Saturday Party Breakdown</div>
+    <ul class="list-unstyled">
+        <li>3pm - greeting</li>
+        <li>4pm - short ceremony</li>
+        <li>6pm - buffet dinner</li>
+        <li>8pm - band</li>
+    </ul>
+</div>
+
+<h3>Accommodation</h3>
+
+<p>If you're coming just for the Saturday make sure you leave plenty of time for travel, it is a bank holiday and the roads will be busy!</p>
+
+<p>If you're staying for the weekend we have 44 beds available for guests in the youth hostel for £10 a night. These are bunk beds arranged in rooms of 2-8 people. If there is a lot of interest in these we will give priority to those who are staying for the whole weekend and those of limited finances! If you interested in staying in the hostel, please let us know in your RSVP or by emailing. If we run out of beds at the hostel there are plenty of hotels and BnBs near by.</p>
+            <h3>Dinner Plans</h3>
+<p>Our plan is to construct a buffet cooked by our wedding guests. We've come up with a provisional "menu" (listed below), to cover the dishes we'd like to offer. If you'd like to cook one (or more!) of the dishes listed, please get in touch with one of us. We'll do our best to coordinate all of you, to try and minimise any doubling-up. If you'd like to cook something, but are a bit daunted by the dishes in the list, please still get in touch. Any culinary contributions will be greatly appreciated, and we would never complain about there being too much food!</p>
+<p>
+Simply let us know that you want to to lend a hand by ticking the box on your RSVP web form, or emailing... and we'll get in touch.</p>
+<h3>Other Stuff</h3>
+<dl>
+  <dt>Gifts</dt>
+  <dd>Aww! Don't worry about gifts, we have everything we need at the moment, we'd just like you to turn up. However, if you want to give a gift, we'd be grateful for a small cash donation towards our new future/house/shark tank.</dd>
+  <dt>Everything else..</dt>
+  <dd>Is on the website (http://emmasinaweddingtime.info). You can also email us (emmasinaweddingtime@gmail.com).</dd>
+</dl>
+            <div class="pagebreak"></div>
+            {% include 'menu.html' %}
+        </div>
+    </div>
+</body>
+</html>
