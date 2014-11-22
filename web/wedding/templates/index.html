@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Welcome to the Santatron{% endblock %}
+{% block content %}
+<h1>Welcome to the Santatron</h1>
+
+<p>The Santatron allows you to construct and instance of Secret Santa for you and your friends.</p>
+
+<div id="main">
+
+</div>
+
+<form method="POST" action="santatron">
+	<input type="text" name="name" placeholder="Name your Santatron" />
+	<input type="submit" value="Make my Santatron!" />
+</form>
+{% endblock %}

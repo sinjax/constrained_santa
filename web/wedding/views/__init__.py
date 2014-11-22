@@ -7,7 +7,7 @@ import os
 def place(): return render("place.html")
 
 @app.route("/", methods=["GET"])
-def plan(): return render("plan.html")
+def index(): return render("index.html")
 
 @app.route("/dinner", methods=["GET"])
 def dinner(): return render("dinner.html")
