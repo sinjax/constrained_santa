@@ -1,4 +1,4 @@
-from dag import DAG, ImutablePath
+from dag import DAG, ImutablePath,Node
 from santa import Constraints
 from random import shuffle
 from IPython import embed
@@ -9,7 +9,17 @@ def allocate(participants, constraints=Constraints()):
 		for taker in participants:
 			if constraints.is_allowed(giver,taker):
 				dag.connect(dag.node(giver),dag.node(taker))
-	completed = allocate_loop(dag)
+	compelted = None
+
+	# This loop is a sanity check and a hack, fix it!
+	while True:
+		completed = allocate_loop(dag)
+		correct = True
+		for x in completed.nodes():
+			if not constraints.is_allowed(x.obj,completed.children(x)[0].obj):
+				correct = False
+				break
+		if correct: break
 	pairs = extract_pairs(completed)
 
 	return pairs
@@ -19,10 +29,10 @@ def extract_pairs(completed):
 	first = completed.current
 	current = completed.children(first)[0]
 	pairs[first.obj] = current.obj
-	# print "%s -> %s"%(first.obj, current.obj)
+	print "%s -> %s"%(first.obj, current.obj)
 	while current is not first:
 		next = completed.children(current)[0]
-		# print "%s -> %s"%(current.obj, next.obj)
+		print "%s -> %s"%(current.obj, next.obj)
 		pairs[current.obj] = next.obj
 		current = next
 	return pairs
@@ -38,8 +48,10 @@ def allocate_loop(dag,path=ImutablePath(),given=[]):
 		nodes = dag.nodes()
 	else:
 		nodes = dag.children(path.current)
-
-	nodes = list((set(nodes) - set(path.nodes())) | set(path.parentless_nodes()))
+	# print "This is parentless: " + str([str(x) for x in path.parentless_nodes()])
+	nodes = list(
+		(set(nodes) - set(path.nodes())) | 
+		 set(path.parentless_nodes()))
 
 	shuffle(nodes)
 	for node in nodes:

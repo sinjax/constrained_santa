@@ -8,9 +8,13 @@ class Constraints(BaseFields, db.Model):
 class Santatrons(BaseFields, db.Model):
 	name = db.Column(db.Unicode(255))
 	santas =  relationship("Santas")
+	assigned = db.Column(db.Boolean(),default=False)
 
 class Santas(BaseFields, db.Model):
     name = db.Column(db.Unicode(255))
     email = db.Column(db.Unicode(512))
-    parent_id = db.Column(db.Integer, db.ForeignKey('santatrons.id'))
+    santatron_id = db.Column(db.Integer, db.ForeignKey('santatrons.id'))
+    assigned_id = db.Column(db.Integer)
     constraints =  relationship("Constraints")
+    confirmed = db.Column(db.Boolean(),default=False)
+    # assigned = relationship("Santas",uselist=False)
