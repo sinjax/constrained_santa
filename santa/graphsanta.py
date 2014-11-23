@@ -12,14 +12,14 @@ def allocate(participants, constraints=Constraints()):
 	compelted = None
 
 	# This loop is a sanity check and a hack, fix it!
-	while True:
-		completed = allocate_loop(dag)
-		correct = True
-		for x in completed.nodes():
-			if not constraints.is_allowed(x.obj,completed.children(x)[0].obj):
-				correct = False
-				break
-		if correct: break
+	# while True:
+	completed = allocate_loop(dag)
+	# correct = True
+	# for x in completed.nodes():
+	# 	if not constraints.is_allowed(x.obj,completed.children(x)[0].obj):
+	# 		correct = False
+	# 		break
+	# if correct: break
 	pairs = extract_pairs(completed)
 
 	return pairs
@@ -29,10 +29,10 @@ def extract_pairs(completed):
 	first = completed.current
 	current = completed.children(first)[0]
 	pairs[first.obj] = current.obj
-	print "%s -> %s"%(first.obj, current.obj)
+	# print "%s -> %s"%(first.obj, current.obj)
 	while current is not first:
 		next = completed.children(current)[0]
-		print "%s -> %s"%(current.obj, next.obj)
+		# print "%s -> %s"%(current.obj, next.obj)
 		pairs[current.obj] = next.obj
 		current = next
 	return pairs
@@ -40,7 +40,7 @@ def extract_pairs(completed):
 	
 def allocate_loop(dag,path=ImutablePath(),given=[]):
 	# print "Path Edge size: ", path.edgesize()
-	if path.edgesize() == dag.size(): 
+	if path.edgesize() == dag.size():
 		return path
 
 	nodes = None
@@ -48,14 +48,19 @@ def allocate_loop(dag,path=ImutablePath(),given=[]):
 		nodes = dag.nodes()
 	else:
 		nodes = dag.children(path.current)
-	# print "This is parentless: " + str([str(x) for x in path.parentless_nodes()])
+	# print "Children of %s"%str(path.current),str([str(x) for x in nodes])
+	# print "Current path nodes: %s"%str([str(x) for x in path.nodes()])
+	# print "Current parentless path nodes: %s"%str([str(x) for x in path.parentless_nodes()])
+	# print "Current parented path nodes: %s"%str([str(x) for x in path.parented_nodes()])
 	nodes = list(
-		(set(nodes) - set(path.nodes())) | 
-		 set(path.parentless_nodes()))
-
+		(set(nodes) - set(path.parented_nodes())) 
+	)
+	# print "nodes to check: %s"%str([str(x) for x in nodes])
 	shuffle(nodes)
 	for node in nodes:
+		# print "Checking %s"%str(node)
 		p = path.iadd(node)
+		# print "new path: %s"%str(p).replace("\n",", ")
 		if not valid_path(p, dag.size()):
 			continue
 		ret = allocate_loop(dag,p)

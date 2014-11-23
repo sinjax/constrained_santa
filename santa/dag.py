@@ -82,6 +82,8 @@ class DAG(object):
 
 	def parentless_nodes(self):
 		return self._nodes - set(self._rightedges.keys())
+	def parented_nodes(self):
+		return set(self._rightedges.keys())
 
 import copy
 class ImutablePath(DAG):

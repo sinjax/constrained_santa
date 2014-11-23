@@ -52,3 +52,13 @@ def test_valid_path():
 	assert graphsanta.valid_path(p)
 	p = p.iadd(p.node("c"))
 	assert not graphsanta.valid_path(p)
+
+def test_broken_case():
+	import santa.graphsanta as graphsanta
+	import random
+
+	random.seed(4)
+
+	gsantaC = graphsanta.Constraints()
+	gsantaC.add_constraints("a",["c"])
+	confirm(graphsanta.allocate(["a","b","c"],gsantaC))
